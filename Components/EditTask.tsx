@@ -11,9 +11,9 @@ interface EditTaskProps {
 const EditTask = ({closeModal, taskId}:EditTaskProps) => {
   const { fetchTaskById, editTask } = useTasks();
 
-  const [task, setTask] = useState({});
+  const [task, setTask] = useState(null);
 
-  const [category, setCategory] = useState();
+  const [category, setCategory] = useState('');
 
   const [isValidTask, setIsValidTask] = useState<boolean>(false);
 
