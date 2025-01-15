@@ -2,20 +2,142 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+html,body{
+  font-family: "Inter", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body{
+    min-height: 100vh;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.padding-cls{
+    @apply px-5;
+}
+
+.root > *{
+    transition: .3s;
+}
+
+.root nav::before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, #ac3fb7 10%, transparent 11%),radial-gradient(circle at bottom left, #ac3fb7 5%, transparent 6%),radial-gradient(circle at bottom right, #ac3fb7 5%, transparent 6%),radial-gradient(circle at top left, #ac3fb7 5%, transparent 6%),radial-gradient(circle at top right, #ac3fb7 5%, transparent 6%);
+    background-size: 1em 1em;
+    opacity: .15;
+    z-index: 1;
+    mask-image: linear-gradient(to bottom, #000, transparent);
+}
+
+.root nav *{
+    z-index: 2;
+}
+
+.task-modal-header::before{
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, #0f172a 10%, transparent 11%),radial-gradient(circle at bottom left, #0f172a 5%, transparent 6%),radial-gradient(circle at bottom right, #0f172a 5%, transparent 6%),radial-gradient(circle at top left, #0f172a 5%, transparent 6%),radial-gradient(circle at top right, #0f172a 5%, transparent 6%);
+    background-size: 1em 1em;
+    opacity: .15;
+    z-index: 1;
+    mask-image: linear-gradient(to bottom, #000, transparent);
+}
+
+.todos .todo > li:not(:last-child){
+    @apply border-b-2;
+}
+
+.todos .todo > li:last-child{
+    @apply rounded-b-xl
+}
+
+.dots{
+    position: relative;
+}
+
+.dots::before{
+    --wh: 100%;
+    content: '';
+    width: var(--wh);
+    height: var(--wh);
+    position: absolute;
+    top: 50%;
+    right: 180%;
+    transform: translateY(-50%);
+    background: radial-gradient(circle, #0f172a 10%, transparent 11%);
+    background-size: .6em .4em;
+}
+
+.orbit:nth-child(1){
+    --delay: .8s;
+}
+
+.orbit:nth-child(2){
+    --delay: .5s;
+}
+
+.orbit:nth-child(3){
+    --delay: .1s;
+}
+
+.orbit{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    animation: orbit-anim 30s linear var(--delay) infinite;
+}
+
+.orbit::before,
+.orbit::after{
+    content: '';
+    --wh: 1.25em;
+    width: var(--wh);
+    height: var(--wh);
+    background: var(--bg);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px rgba(123,25,132, .25);
+    animation: beats 30s ease infinite;
+}
+
+.orbit::before{
+    left: calc(var(--wh)/2 * -1);
+}
+
+.orbit::after{
+    right: calc(var(--wh)/2 * -1);
+}
+
+@keyframes orbit-anim{
+    to{
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes beats{
+    to{
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
+.fade-in{
+    transform: translateY(10%);
+    opacity: 0;
+    animation: fade-in .3s ease .3s forwards;
+}
+
+@keyframes fade-in{
+    to{
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
