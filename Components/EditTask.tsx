@@ -58,13 +58,15 @@ const EditTask = ({closeModal, taskId}:EditTaskProps) => {
   }
 
   useEffect(() => {
-    const {taskName, description, due, taskStatus, category, userId, taskId} = task;
-
-    if(taskName && description && due && taskStatus && category && userId && taskId){
-      setIsValidTask(true);
-    }
-    else{
-      setIsValidTask(false);
+    if(task){
+      const {taskName, description, due, taskStatus, category, userId, taskId} = task;
+  
+      if(taskName && description && due && taskStatus && category && userId && taskId){
+        setIsValidTask(true);
+      }
+      else{
+        setIsValidTask(false);
+      }
     }
   }, [task]);
 
@@ -76,12 +78,14 @@ const EditTask = ({closeModal, taskId}:EditTaskProps) => {
 
   useEffect(() => {
     const fetchTask = async () => {
-      const task = await fetchTaskById(taskId);
-
-      const truncatedTask = {taskName:task.taskName, description: task.description, category: task.category, due: task.due, taskStatus: task.taskStatus, userId:task.userId, taskId: task._id}
-
-      setTask(truncatedTask);
-      setCategory(truncatedTask.category);
+      if(taskId){
+        const task = await fetchTaskById(taskId);
+  
+        const truncatedTask = {taskName:task.taskName, description: task.description, category: task.category, due: task.due, taskStatus: task.taskStatus, userId:task.userId, taskId: task._id}
+        
+        setTask(truncatedTask);
+        setCategory(truncatedTask.category);
+      }
     }
 
     fetchTask();

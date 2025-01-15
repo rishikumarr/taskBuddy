@@ -9,7 +9,7 @@ interface BoardListProps {
   taskId: string;
   taskName: string;
   taskDue: string;
-  taskStatus: "to-do" | "in-progress" | "completed";
+  taskStatus: string;
   taskCategory: string;
 }
 

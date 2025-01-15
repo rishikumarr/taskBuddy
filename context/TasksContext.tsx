@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useAuth } from './AuthContext';
 // import { useModal } from './ModalContext';
 import Task from '@/utils/taskInterface';
-import { GSP_NO_RETURNED_VALUE } from 'next/dist/lib/constants';
 
 interface TasksContextType {
   tasks: Task[];
@@ -15,9 +14,9 @@ interface TasksContextType {
   filterByCategory: (taskCategory: string) =>void;
 }
 
-const TasksContext = createContext<TasksContextType | null>(null);
+const TasksContext = createContext(null);
 
-export const useTasks = (): TasksContextType => {
+export const useTasks = () => {
   const context = useContext(TasksContext);
 
   if (!context) {
@@ -35,7 +34,7 @@ export const TasksProvider: React.FC<TasksProviderProps> = ({ children }) => {
   const { currentUser, userLoggedIn, closeModal } = useAuth();
 //   const { closeModal } = useModal();
 
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState([]);
 
   const fetchTasks = async () => {
     if (!userLoggedIn || !currentUser) return;
@@ -66,7 +65,7 @@ export const TasksProvider: React.FC<TasksProviderProps> = ({ children }) => {
     }
   };
 
-  const editTask = async (updatedTask, taskId:string) => {
+  const editTask = async (updatedTask, taskId) => {
     if (!userLoggedIn || !currentUser) return null;
 
     try {
@@ -152,7 +151,7 @@ export const TasksProvider: React.FC<TasksProviderProps> = ({ children }) => {
     fetchTasks();
   }, [userLoggedIn, currentUser]);
 
-  const value: TasksContextType = {
+  const value = {
     tasks,
     setTasks,
     createTask,
