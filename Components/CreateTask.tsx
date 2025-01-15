@@ -23,9 +23,9 @@ const CreateTask = ({closeModal}:CreateTaskProps) => {
 
   const [category, setCategory] = useState("other");
 
-  const titleRef = useRef(null);
+  const titleRef = useRef<HTMLInputElement | null>(null);
 
-  const [taskData, setTaskData] = useState<taskDataType>({category: 'other', taskStatus: 'to-do', userId: currentUser?.user_id, });
+  const [taskData, setTaskData] = useState<taskDataType>({taskName: "", description: null, category: 'other', due: '', taskStatus: 'to-do', userId: currentUser?.user_id || "", });
 
   const [isValidTask, setIsValidTask] = useState<boolean>(false);
 
