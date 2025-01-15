@@ -6,7 +6,7 @@ const TaskBar = () => {
   const {openModal} = useModal();
   const {filterByCategory} = useTasks();
 
-  const handleFilter = (e) => {
+  const handleFilter = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const category = e.target.value;
     filterByCategory(category);
   }
