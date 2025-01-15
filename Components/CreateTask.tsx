@@ -11,9 +11,9 @@ type CreateTaskProps = {
 interface taskDataType {
   taskName: string | number;
   description: string | number | null;
-  category: "work" | "personal" | "other";
+  category: string;
   due: string;
-  taskStatus: "to-do" | 'in-progress' | 'completed';
+  taskStatus: string;
   userId: string;
   _id?:string;
 }
@@ -26,7 +26,7 @@ const CreateTask = ({closeModal}:CreateTaskProps) => {
 
   const titleRef = useRef<HTMLInputElement | null>(null);
 
-  const [taskData, setTaskData] = useState<taskDataType>({taskName: "", description: '', category: 'other', due: '', taskStatus: 'to-do', userId: currentUser?.user_id || "", });
+  const [taskData, setTaskData] = useState({taskName: "", description: '', category: 'other', due: '', taskStatus: 'to-do', userId: currentUser?.user_id || "", });
 
   const [isValidTask, setIsValidTask] = useState<boolean>(false);
 
